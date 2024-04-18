@@ -13,6 +13,13 @@ RUN python3 -m build
 RUN pip install dist/diskannpy-0.5.0rc3.post1-cp310-cp310-linux_x86_64.whl
 WORKDIR /home/app
 
+RUN git clone --recursive --branch one_g_opt https://github.com/matchyc/mysteryann.git
+WORKDIR /home/app/mysteryann/pybindings
+RUN pip3 install virtualenv build
+RUN pip3 install pybind11[global]
+RUN pip3 install .
+WORKDIR /home/app
+
 RUN apt update
 RUN apt install python-is-python3
 RUN git clone https://github.com/TangSiyang2001/pyanns.git --branch master --depth 1
